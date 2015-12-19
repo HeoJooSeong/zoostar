@@ -1,0 +1,71 @@
+<!DOCTYPE html><html>
+
+<head>
+<meta charset="utf-8">
+<title>쉘 스크립트 #1</title>
+
+</head>
+<body>
+<h3 id="toc_6325">쉘 사용 방법</h3>
+
+<p>bash 쉘 스크립트를 사용하기 위해서는 파일의 가장 처음에<br>
+<code>#!/bin/bash</code>를 입력해 줘야한다. (일반 쉘의 경우 <code>#!/bin/sh</code>) </p>
+
+<p>확장자 <code>.sh</code> 파일로 작성 후 실행 하면 평소 터미널에서 사용하던 명령어들을 쉽게 사용 할 수 있다.</p>
+
+<p><strong>- bash 쉘 실행 방법</strong>  </p>
+
+<ol>
+<li>파일의 실행 권한을 주기 위해 <code>chmod 777 파일명.sh</code>을 입력한다. (편의를 위해  모든 권한 부여)</li>
+<li><code>./파일명.sh</code>로 실행한다.</li>
+</ol>
+
+<p><strong>- sh 쉘 실행 방법</strong>  </p>
+
+<ol>
+<li><p><code>.sh</code>파일을 실행하는 방법<br>
+ 터미널 명령창에서 <code>/bin/sh -xv 파일명.sh</code> (이 때, v는 작업 보이기)  </p></li>
+<li><p>터미널에서 sh를 이용해 바로 실행시키는 방법
+ <code>/bin/sh -c &quot;실행 시킬 코드 ex) ls -al&quot;</code> </p></li>
+</ol>
+
+<h3 id="toc_6326">파일 이동 및 파일명 가져오기</h3>
+
+<p>다음은 파일 이동의 예제다.<br>
+/Users/zoostar/Desktop 경로에서 확장자 <code>.pdf</code> 인 모든 파일을<br>
+Downloads 폴더로 이동 시키는 것을 의미한다.</p>
+
+<pre><code class="language-.bash">#!/bin/bash
+
+mv /Users/zoostar/Desktop/*.&quot;pdf&quot; /Users/zoostar/Downlods/
+
+</code></pre>
+
+<p>다음은 파일명 가져오기의 예제다.<br>
+basename 이란 함수를 사용하면 파일의 절대경로에서 파일명만 뽑아낸다.<br>
+이 때, <code>basename 파일경로 .확장자</code>를 쓰게 되면 파일명에서 확장자를 제외한 순수한 파일명만 뽑아 낼 수 있다.</p>
+
+<pre><code class="language-.bash">foldername=/Users/zoostar/Desktop
+
+
+for i in $foldername/* 
+do
+    filename=`basename $i .pdf`
+    filefullname=`basename $LINE`
+    echo $filename
+    echo $filefullname
+done 
+</code></pre>
+
+<h2 id="toc_6327"></h2>
+
+<blockquote>
+<p>실행결과<br>
+$  zoostar<br>
+$  zoostar.pdf  </p>
+</blockquote>
+
+
+</body>
+
+</html>
