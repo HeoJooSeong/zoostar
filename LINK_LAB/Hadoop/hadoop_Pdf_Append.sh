@@ -1,6 +1,6 @@
 #!/bin/bash
 
-foldername=/home/link/tmpPdf
+foldername=/home/link/paper_archive
 
 
 for LINE in $foldername/* 
