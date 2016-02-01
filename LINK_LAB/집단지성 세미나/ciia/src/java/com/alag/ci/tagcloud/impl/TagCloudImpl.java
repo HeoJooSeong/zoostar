@@ -20,7 +20,7 @@ import com.alag.ci.tagcloud.TagCloudElement;
 public class TagCloudImpl implements TagCloud {
     
     private List<TagCloudElement> elements = null;
-    
+
     public TagCloudImpl(List<TagCloudElement> elements,
                         FontSizeComputationStrategy strategy) {
         this.elements = elements;
@@ -28,19 +28,19 @@ public class TagCloudImpl implements TagCloud {
         Collections.sort(this.elements);
     }
     
-    public TagCloudImpl(MetaDataVector metaDataVector,
-                        FontSizeComputationStrategy strategy) {
-      this(getTagCloudElements(metaDataVector),strategy);
-    }
+//    public TagCloudImpl(MetaDataVector metaDataVector,
+//                        FontSizeComputationStrategy strategy) {
+//      this(getTagCloudElements(metaDataVector),strategy);
+//    }
     
-    private static List<TagCloudElement> getTagCloudElements(MetaDataVector metaDataVector) {
-        ArrayList<TagCloudElement> list = new ArrayList<TagCloudElement>();
-        for (TagMagnitude tm : metaDataVector.getTagMetaDataMagnitude()) {
-            list.add(new TagCloudElementImpl(tm.getTagText(),
-                    tm.getMagnitude()));
-        }    
-        return list;
-    }
+//    private static List<TagCloudElement> getTagCloudElements(MetaDataVector metaDataVector) {
+//        ArrayList<TagCloudElement> list = new ArrayList<TagCloudElement>();
+//        for (TagMagnitude tm : metaDataVector.getTagMetaDataMagnitude()) {
+//            list.add(new TagCloudElementImpl(tm.getTagText(),
+//                    tm.getMagnitude()));
+//        }
+//        return list;
+//    }
 
     public List<TagCloudElement> getTagCloudElements() {
        return this.elements;
