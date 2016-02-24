@@ -25,7 +25,7 @@ public class TagCloudElementImpl implements TagCloudElement {
     }
 
     public int compareTo(TagCloudElement o) {
-        return this.tagText.compareTo(o.getTagText());
+        return (int)(o.getWeight()-this.weight);
     }
 
     public void setFontSize(String fontSize) {
