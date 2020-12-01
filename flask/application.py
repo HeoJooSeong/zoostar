@@ -4,12 +4,12 @@ from flask import render_template
 from db import mysql
 
 application = Flask(__name__)
-db = mysql.Testdb()
+# db = mysql.Testdb()
 
 @application.route("/")
 def hello():
-    result = db.select_all()
-    return str(result)
+    # result = db.select_all()
+    return str("flask test")
 
 @application.route("/abc")
 def hello2():
@@ -41,7 +41,7 @@ def hello_name(user):
 
 @application.route("/index")
 def index():
-    result = db.select_all()
+    # result = db.select_all()
     return render_template("index.html",aaa=str(result))
 
 
@@ -49,4 +49,4 @@ if __name__ == "__main__":
     application.debug = True
     application.config['DEBUG'] = True
 
-    application.run(host="0.0.0.0", port="8080")
+    application.run(host="0.0.0.0", port="5000")
