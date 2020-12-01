@@ -42,7 +42,7 @@ def hello_name(user):
 @application.route("/index")
 def index():
     # result = db.select_all()
-    return render_template("index.html",aaa=str("aaa")
+    return render_template("index.html",aaa=str("aaa"))
 
 
 if __name__ == "__main__":
