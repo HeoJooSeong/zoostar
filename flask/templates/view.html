@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 {#{{ aa }}#}
@@ -15,6 +18,103 @@
 
 {{ data }}
 <img src="/static/img/test.png">
+
+
+<a id="custom-login-btn" href="javascript:loginWithKakao()">
+  <img
+    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+    width="222"
+  />
+</a>
+
+
+<a href="javascript:send_msg()">send</a>
+
+
+<p id="token-result"></p>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Kakao.init('0dddc6d0cbfe80e16fbf32cbe74236ea');
+        Kakao.isInitialized();
+    })
+
+
+    function loginWithKakao() {
+        Kakao.Auth.authorize({
+            redirectUri: 'http://127.0.0.1:5000/test'
+
+        })
+    }
+    // 아래는 데모를 위한 UI 코드입니다.
+    displayToken()
+    function displayToken() {
+        const token = getCookie('authorize-access-token')
+        {#console.log('11',token)#}
+        {#const token = getToken()#}
+        console.log('22',token)
+        if(token) {
+        console.log('33')
+        Kakao.Auth.setAccessToken(token)
+        console.log(Kakao.Auth.getAccessToken())
+          Kakao.Auth.getStatusInfo(({ status }) => {
+            if(status === 'connected') {
+              document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+            } else {
+              Kakao.Auth.setAccessToken(null)
+            }
+          })
+        }
+    }
+
+    {#function getToken() {#}
+    {#    var para = document.location.href.split("?");#}
+    {#    console.log('11', para)#}
+    {#    para = para[1].split('=')[1]#}
+    {#    console.log('33', para);#}
+    {#    return para#}
+
+    function getCookie(name) {
+        const value = "; " + document.cookie;
+        console.log('44', value)
+        const parts = value.split("; " + name + "=");
+        if (parts.length === 2)
+            return parts.pop().split(";").shift();
+    }
+
+    function send_msg(){
+        {#displayToken()#}
+        Kakao.API.request({
+            url: '/v2/api/talk/memo/default/send',
+            data: {
+                template_object: {
+                    object_type: 'feed',
+                    content: {
+                        title: '카카오톡 링크 1.0',
+                        description: '디폴트 템플릿 FEED',
+                        image_url:
+                            'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                        link: {
+                            web_url: 'https://developers.kakao.com',
+                            mobile_web_url: 'https://developers.kakao.com',
+                        },
+                    },
+                    social: {
+                        like_count: 100,
+                        comment_count: 200,
+                    },
+                    button_title: '바로 확인',
+                },
+            },
+            success: function(response) {
+                console.log(response);
+            },
+            fail: function(error) {
+                console.log(error);
+            },
+    });
+    }
+
+</script>
 
 </body>
 </html>
